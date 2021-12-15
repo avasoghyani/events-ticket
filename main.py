@@ -26,7 +26,7 @@ if answer_key1 == '1' and answer_key2 == "1":
     a = filehandler.File('admin.csv')
     a.write({'full name': full_name, 'user name': user_name, 'password': hash_pass})
     print(f"you have successfully registered az admin by name {user_name}")
-    login.logger.debug(f'admin by name {full_name} registered now')
+    login.logger.info(f'admin by name {full_name} registered now')
 if answer_key1 == '1' and answer_key2 == '2':
     full_name = input('please enter you name and last name: ')
     user_name = input('please enter your username: ')
@@ -36,7 +36,7 @@ if answer_key1 == '1' and answer_key2 == '2':
     a = filehandler.File('users.csv')
     a.write({'full name': full_name, 'user name': user_name, 'password': hash_pass})
     print(f"you have successfully registered az user by name {user_name}")
-    login.logger.error(f'user by name {full_name} registered now', exc_info=True)
+    login.logger.info(f'user by name {full_name} registered now', exc_info=True)
 if answer_key1 == '2' and answer_key2 == '1':
     i = 0
     while i < 3:
