@@ -1,42 +1,21 @@
 import events
 import filehandler
-import hashlib
-import login
+import users_admins
 import csv
-from pprint import pprint
 import login
 
-# import csv # for find the special row and print it
-# with open('events.csv', 'r') as csvfile:
-#     csvreader = csv.DictReader(csvfile)
-#     for i , row in enumerate(csvreader):
-#         if i==0:
-#             print(row)
 events_list = []
-
 answer_key1 = input('you want to login or register?\nI did not register before-->> 1\nI have already registered-->>'
                     ' 2\n')
 answer_key2 = input('you are admin or normal user?\nIm Admin-->> 1 \nIm normal user-->> 2\n')
 if answer_key1 == '1' and answer_key2 == "1":
-    full_name = input('please enter you name and last name: ')
-    user_name = input('please enter your username: ')
-    pass_word = input('please enter your password: ')
-    hash_object = hashlib.md5(pass_word.encode())
-    hash_pass=hash_object.hexdigest()
-    a = filehandler.File('admin.csv')
-    a.write({'full name': full_name, 'user name': user_name, 'password': hash_pass})
-    print(f"you have successfully registered az admin by name {user_name}")
-    login.logger.info(f'admin by name {full_name} registered now')
+    admin = users_admins.get_data_create_admin()
+    print(f"{admin.username} successfully registered az admin")
+    login.logger.info(f'{admin.username} registered now az admin', exc_info=True)
 if answer_key1 == '1' and answer_key2 == '2':
-    full_name = input('please enter you name and last name: ')
-    user_name = input('please enter your username: ')
-    pass_word = input('please enter your password: ')
-    hash_object = hashlib.md5(pass_word.encode())
-    hash_pass=hash_object.hexdigest()
-    a = filehandler.File('users.csv')
-    a.write({'full name': full_name, 'user name': user_name, 'password': hash_pass})
-    print(f"you have successfully registered az user by name {user_name}")
-    login.logger.info(f'user by name {full_name} registered now', exc_info=True)
+    user = users_admins.get_data_create_user()
+    print(f"{user.username} successfully registered az normal user")
+    login.logger.info(f'{user.username} registered now az normal user', exc_info=True)
 if answer_key1 == '2' and answer_key2 == '1':
     i = 0
     while i < 3:
