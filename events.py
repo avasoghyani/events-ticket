@@ -31,10 +31,11 @@ list_events = []
 
 def print_events():
     for i, event in enumerate(list_events):
-        print(f'{i + 1}:  {event}')
+        print(f''
+              f'{i + 1}:  {event}')
 
 
-def get_data():
+def add_event():
     event_name = input('what is the event name: ')
     time_of_event = input('enter time of event: ')
     place_of_event = input('enter the event place: ')
@@ -45,7 +46,8 @@ def get_data():
     discount_code = input('enter the discount code: ')
     event = Events(event_name, time_of_event, place_of_event, total_capacity, remaining_capacity, ticket_type,
                    ticket_fee, discount_code)
-    filehandler.File('events.csv').write({'event name': event_name, 'time of event': time_of_event, 'place of event':
-        place_of_event, 'total capacity': total_capacity, 'remaining capacity': remaining_capacity, 'ticket type':
-                                              ticket_type, 'ticket fee': ticket_fee, 'discount code': discount_code})
+    filehandler.File('events.csv').write(
+        {'event name': event.event_name, 'time of event': event.time_of_event, 'place of event': event.place_of_event,
+         'total capacity': event.total_capacity, 'remaining capacity': event.remaining_capacity,
+         'ticket type': event.ticket_type, 'ticket fee': event.ticket_fee, 'discount code': event.discount_code})
     return event
