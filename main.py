@@ -49,10 +49,11 @@ while True:
                     if discount_code == events_list[i]['discount code']:  # discount is 10%
                         print(
                             f"the cost of your ticket is:{ticket_number*((int(events_list[i]['ticket fee'])*90)/100)}")
-                    elif discount_code != events_list[i]['discount code']:
-                        print('your code is wrong!')
                     elif discount_code == '1':
                         print(f"the cost of your ticket is:{ticket_number * events_list[i]['ticket fee']}")
+                    elif discount_code != events_list[i]['discount code']:
+                        print('your code is wrong!')
+
                     answer_key5 = input('do you want to pay and buy ticket?\n yes-->>1 \n No-->>2\n')
                     if answer_key5 == '1':
                         events_list2=events_list[i]
