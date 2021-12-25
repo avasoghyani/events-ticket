@@ -26,8 +26,7 @@ class User:
                     print('your password is wrong')
                 if password != self.password and i == 2:
                     print('you enter more than 3time wrong password so your account is block!')
-                    login.logger.error(
-                        f'admin by username {self.username} enter 3 time wrong password and account block')
+                    login.logger.error(f"admin by username {self.username} enter 3 time wrong password and account block")
         else:
             print('username is not fond')
 
@@ -38,7 +37,7 @@ class Admin(User):
 
 
 def get_data_create_user():
-    full_name = input('please enter you name and last name: ')
+    full_name = input('please enter your name and last name: ')
     email = input('please enter your email address: ')
     mobile = input('please enter your mobile number: ')
     username = input('please enter your username: ')
@@ -74,14 +73,14 @@ def login(file):
         for i in range(3):
             password = input('please enter your password: ')
             hash_object = hashlib.md5(password.encode())
-            hashpass = hash_object.hexdigest()
+            hash_pass = hash_object.hexdigest()
             pass_value = filehandler.File(file)
-            if pass_value.check_pass(hashpass):
+            if pass_value.check_pass(hash_pass):
                 print(f'well come {username}')
                 break
-            if pass_value.check_pass(hashpass) != True:
+            if pass_value.check_pass(hash_pass) != True:
                 print('your password is wrong')
-            if pass_value.check_pass(hashpass) != True and i == 2:
+            if pass_value.check_pass(hash_pass) != True and i == 2:
                 print('you enter more than 3time wrong password so your account is block!')
                 login.logger.error(
                     f'admin by username {username} enter 3 time wrong password and account block')

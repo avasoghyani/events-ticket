@@ -26,8 +26,15 @@ class Events:
                f" {self.total_capacity} and remain capacity is{self.remaining_capacity} and ticket cost is" \
                f" {self.ticket_fee}"
 
+    @staticmethod
+    def show_event_list():
+        filehandler.File('events.csv').show_event_for_user()
+        events_list = filehandler.File('events.csv').read_csvfile_as_dictionary()
+        return events_list
+
 
 list_events = []
+
 
 
 def print_events():

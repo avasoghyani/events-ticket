@@ -36,8 +36,7 @@ while True:
         # user.user_login()
         users_admins.login('users.csv')
         print('List of available events:')
-        filehandler.File('events.csv').show_event_for_user()
-        events_list = filehandler.File('events.csv').read_csvfile_as_dictionary()  # list of events
+        events_list = events.Events.show_event_list()# list of events
         answer_key4 = int(input('which event do you want to buy? '))
         for i in range(len(events_list)):
             if i == answer_key4:
@@ -50,7 +49,7 @@ while True:
                         print(
                             f"the cost of your ticket is:{ticket_number*((int(events_list[i]['ticket fee'])*90)/100)}")
                     elif discount_code == '1':
-                        print(f"the cost of your ticket is:{ticket_number * events_list[i]['ticket fee']}")
+                        print(f"the cost of your ticket is:{ticket_number * int(events_list[i]['ticket fee'])}")
                     elif discount_code != events_list[i]['discount code']:
                         print('your code is wrong!')
 

@@ -1,4 +1,6 @@
 import csv
+
+
 class File:
     def __init__(self, path):
         self.path = path
@@ -30,7 +32,6 @@ class File:
                 rows.append(dict(row))
             return rows
 
-
     def show_event_for_user(self):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
@@ -39,12 +40,13 @@ class File:
                     f"{i}-{row['event name']} occur at {row['time of event']} in {row['place of event']} the capacity is {row['total capacity']}" \
                     f" and remain capacity is{row['remaining capacity']} and ticket cost is {row['ticket fee']}")
             return row
+
     def show_event_for_admin(self):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
             for row in csvreader:
-                print(f"{row['event name']}:\n capacity: {row['total capacity']} \n remaining ticket:"
-                      f"{row['remaining capacity']}\n ticket sold: {int(row['total capacity']) - int(row['remaining capacity'])}")
+                print(f"{row['event name']}:\n capacity: {row['total capacity']}  remaining ticket:"
+                      f"{row['remaining capacity']} ticket sold: {int(row['total capacity']) - int(row['remaining capacity'])}")
 
     def find_row(self, a, b):
         with open(self.path, 'r') as csvfile:
@@ -117,6 +119,15 @@ class File:
             for i, row in enumerate(csvreader):
                 if i == num:
                     return row
+
+    def edit_row(self, new_info):
+        all_rows = self.read_csvfile_as_dictionary()
+        final_rows = []
+        for row in all_rows:
+            if row["event name"] == str(new_info["event name"]):
+                row = new_info
+            final_rows.append(row)
+        self.write(final_rows)
     # def edit_row(self, new_info):
     #     all_rows = self.read_csvfile_as_dictionary()
     #     final_rows = []
