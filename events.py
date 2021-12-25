@@ -22,8 +22,9 @@ class Events:
         print(f'you buy this {self.event_name}')
 
     def __str__(self):
-        return f"{self.event_name} occure at {self.time_of_event} in {self.place_of_event} the capacity is {self.total_capacity}" \
-               f" and remain capacity is{self.remaining_capacity} and ticket cost is {self.ticket_fee}"
+        return f"{self.event_name} occure at {self.time_of_event} in {self.place_of_event} the capacity is" \
+               f" {self.total_capacity} and remain capacity is{self.remaining_capacity} and ticket cost is" \
+               f" {self.ticket_fee}"
 
 
 list_events = []
