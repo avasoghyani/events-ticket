@@ -1,4 +1,11 @@
 import csv
+import pandas as pd
+
+
+def update_colum(row_num, new_value):
+    df = pd.read_csv("events.csv")
+    df.loc[row_num, 'remaining capacity'] = new_value
+    df.to_csv("events.csv", index=False)
 
 
 class File:

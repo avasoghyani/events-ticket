@@ -36,28 +36,27 @@ while True:
         # user.user_login()
         users_admins.login('users.csv')
         print('List of available events:')
-        events_list = events.Events.show_event_list()# list of events
+        events_list = events.Events.show_event_list()  # list of events
         answer_key4 = int(input('which event do you want to buy? '))
         for i in range(len(events_list)):
             if i == answer_key4:
                 print(f"you choose {events_list[i]['event name']}\nremaining ticket for this event is "
                       f"{events_list[i]['remaining capacity']}")
-                ticket_number = int(input('how many ticket do you want for?'))
-                if ticket_number <= int(events_list[i]['remaining capacity']):
+                ticket_number = float(input('how many ticket do you want for?'))
+                if ticket_number <= float(events_list[i]['remaining capacity']):
                     discount_code = input('do you have discount code? \n if yes-->enter your code \n if NO-->> 1\n')
                     if discount_code == events_list[i]['discount code']:  # discount is 10%
                         print(
-                            f"the cost of your ticket is:{ticket_number*((int(events_list[i]['ticket fee'])*90)/100)}")
+                            f"the cost of your ticket is:{ticket_number * ((float(events_list[i]['ticket fee']) * 90) / 100)}")
                     elif discount_code == '1':
-                        print(f"the cost of your ticket is:{ticket_number * int(events_list[i]['ticket fee'])}")
+                        print(f"the cost of your ticket is:{ticket_number * float(events_list[i]['ticket fee'])}")
                     elif discount_code != events_list[i]['discount code']:
                         print('your code is wrong!')
 
                     answer_key5 = input('do you want to pay and buy ticket?\n yes-->>1 \n No-->>2\n')
                     if answer_key5 == '1':
-                        events_list2=events_list[i]
-                        events_list[i]['remaining capacity']=int(events_list[i]['remaining capacity']) - ticket_number
-                        filehandler.File('events.csv').edit_file(events_list2,events_list[i])
+                        events_list[i]['remaining capacity'] = float(events_list[i]['remaining capacity']) - ticket_number
+                        filehandler.update_colum(i, events_list[i]['remaining capacity'])
                         print(f"you buy {events_list[i]['event name']} it occur in {events_list[i]['place of event']}"
                               f" at {events_list[i]['time of event']} ")
                         login.logger.info(f'{ticket_number} ticket buy', exc_info=True)

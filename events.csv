@@ -1,6 +1,6 @@
 event name,time of event,place of event,total capacity,remaining capacity,ticket type,ticket fee,discount code
-concert googosh,1401/01/10,gorgan,500,465,"a,b,c",3000000,a2a2a2
-consert ebi,s,d,12,4,w,23333,sss
-concert googosh,1401/01/10,gorgan,500,465,"a,b,c",3000000,a2a2a2
-concert googosh,1401/01/10,gorgan,500,465,"a,b,c",3000000,a2a2a2
-concert googosh,1401/01/10,gorgan,500,465,"a,b,c",3000000,a2a2a2
+concert darush,1401/01/10,gorgan,500.0,12.0,"a,b,c",3000000.0,a2a2a2
+consert ebi,s,d,12.0,4.0,w,23333.0,sss
+concert googosh,1401/01/10,gorgan,500.0,22.0,"a,b,c",3000000.0,a2a2a2
+concert shadmehr,1401/01/10,gorgan,500.0,21.0,"a,b,c",3000000.0,a2a2a2
+concert siavash,1401/01/10,gorgan,500.0,60.0,"a,b,c",3000000.0,a2a2a2
