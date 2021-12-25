@@ -1,6 +1,4 @@
 import csv
-
-
 class File:
     def __init__(self, path):
         self.path = path
@@ -32,28 +30,41 @@ class File:
                 rows.append(dict(row))
             return rows
 
-    # def edit_row(self, new_info):
-    #     all_rows = self.read_csvfile_as_dictionary()
-    #     final_rows = []
-    #     for row in all_rows:
-    #         if row["event name"] == str(new_info["event name"]):
-    #             row = new_info
-    #         final_rows.append(row)
-    #     self.write(final_rows)
 
-    def show_row_of_event(self):
+    def show_event_for_user(self):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
             for i, row in enumerate(csvreader):
                 print(
-                    f"{i}-{row['event name']} occure at {row['time of event']} in {row['place of event']} the capacity is {row['total capacity']}" \
+                    f"{i}-{row['event name']} occur at {row['time of event']} in {row['place of event']} the capacity is {row['total capacity']}" \
                     f" and remain capacity is{row['remaining capacity']} and ticket cost is {row['ticket fee']}")
+            return row
+    def show_event_for_admin(self):
+        with open(self.path, 'r') as csvfile:
+            csvreader = csv.DictReader(csvfile)
+            for row in csvreader:
+                print(f"{row['event name']}:\n capacity: {row['total capacity']} \n remaining ticket:"
+                      f"{row['remaining capacity']}\n ticket sold: {int(row['total capacity']) - int(row['remaining capacity'])}")
 
     def find_row(self, a, b):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
             for row in csvreader:
                 if row['user name'] == a and row['password'] == b:
+                    return True
+
+    def check_pass(self, password):
+        with open(self.path, 'r') as csvfile:
+            csvreader = csv.DictReader(csvfile)
+            for row in csvreader:
+                if row['password'] == password:
+                    return True
+
+    def check_username(self, username):
+        with open(self.path, 'r') as csvfile:
+            csvreader = csv.DictReader(csvfile)
+            for row in csvreader:
+                if row['username'] == username:
                     return True
 
     def write(self, item_dict):
@@ -106,3 +117,11 @@ class File:
             for i, row in enumerate(csvreader):
                 if i == num:
                     return row
+    # def edit_row(self, new_info):
+    #     all_rows = self.read_csvfile_as_dictionary()
+    #     final_rows = []
+    #     for row in all_rows:
+    #         if row["event name"] ==new_info["event name"]:
+    #             row = new_info
+    #         final_rows.append(row)
+    #     self.write(final_rows)
