@@ -1,11 +1,37 @@
 import csv
 import pandas as pd
+import events
 
 
 def update_colum(row_num, new_value):
     df = pd.read_csv("events.csv")
     df.loc[row_num, 'remaining capacity'] = new_value
     df.to_csv("events.csv", index=False)
+
+
+def read_csv_pandas_user(file):
+    df = pd.read_csv(file)
+    a = df[["event name", "time of event", "place of event", "remaining capacity", "ticket fee"]]
+    dff = a[a['remaining capacity'] != 0]
+    print(dff.to_string())
+
+
+def read_csv_pandas_admin(file):
+    df = pd.read_csv(file)
+    print(df.to_string())
+
+
+def search_in_csv(file, row_num, colum_title):
+    df = pd.read_csv(file)
+    cell_value = df.loc[row_num, colum_title]
+    return cell_value
+
+
+def select_row_object(row_num, file):
+    a = File(file).read_csvfile_as_dictionary()
+    b = a[row_num]
+    c = events.Events(*b.values())
+    return c
 
 
 class File:
@@ -55,12 +81,12 @@ class File:
                 print(f"{row['event name']}:\n capacity: {row['total capacity']}  remaining ticket:"
                       f"{row['remaining capacity']} ticket sold: {int(row['total capacity']) - int(row['remaining capacity'])}")
 
-    def find_row(self, a, b):
+    def return_row(self, username):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
             for row in csvreader:
-                if row['user name'] == a and row['password'] == b:
-                    return True
+                if row['user name'] == username:
+                    return row
 
     def check_pass(self, password):
         with open(self.path, 'r') as csvfile:
@@ -101,25 +127,6 @@ class File:
             for row in rows:
                 writer.writerow(row)
 
-    def edit_file(self, prev_dic, new_dic):
-        with open(self.path, 'r') as csvfile:
-            rows = []
-            csvreader = csv.DictReader(csvfile)
-            for row in csvreader:
-                rows.append(dict(row))
-
-        for i, j in enumerate(rows):
-            for k, v in prev_dic.items():
-                if j[k] == v:
-                    for k2, v2 in new_dic.items():
-                        rows[i][k2] = v2
-
-        keys = rows[0].keys()
-        with open(self.path, 'w', newline='') as output_file:
-            dict_writer = csv.DictWriter(output_file, keys)
-            dict_writer.writeheader()
-            dict_writer.writerows(rows)
-
     def select_special_row(self, num):
         with open(self.path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
@@ -135,11 +142,3 @@ class File:
                 row = new_info
             final_rows.append(row)
         self.write(final_rows)
-    # def edit_row(self, new_info):
-    #     all_rows = self.read_csvfile_as_dictionary()
-    #     final_rows = []
-    #     for row in all_rows:
-    #         if row["event name"] ==new_info["event name"]:
-    #             row = new_info
-    #         final_rows.append(row)
-    #     self.write(final_rows)
